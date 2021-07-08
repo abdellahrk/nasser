@@ -10,6 +10,11 @@ class UserTest extends TestCase
     {
         $user = new User();
 
-        
+        $user->setUsername('Ramadan');
+
+        $fullname = $user->getUsername();
+
+        $this->assertSame('Ramadan', $fullname);
+
     }
 }
