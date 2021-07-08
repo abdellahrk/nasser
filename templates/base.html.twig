@@ -7,10 +7,20 @@
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
+            <link href="{{ asset('styles/dashlite.css') }}" rel="stylesheet" />
+            <link href="{{ asset('styles/theme.css') }}" rel="stylesheet" />
+            <link href="{{ asset('styles/dashlite.css') }}" rel="stylesheet" />
+            <link href="{{ asset('styles/themify-icons.css') }}" rel="stylesheet" />
+            <link href="{{ asset('styles/fontawesome-icons.css') }}" rel="stylesheet" />
         {% endblock %}
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
+            <script src="{{ asset('js/scripts.js') }}"></script>
+            <script src="{{ asset('js/bundles.js') }}"></script>
+            <script src="{{ asset('js/charts/gd-default.js') }}"></script>
+            <script src="{{ asset('js/apps/kanban.js') }}"></script>
+            <script src="{{ asset('js/libs/jkanban.js') }}"></script>
         {% endblock %}
     </head>
     <body>
