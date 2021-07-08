@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile index{% endblock %}
+
+{% block body %}
+    <h1>Profile index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fullname</th>
+                <th>AccountNumber</th>
+                <th>Country</th>
+                <th>Address</th>
+                <th>Iban</th>
+                <th>Swift</th>
+                <th>Balance</th>
+                <th>Currency</th>
+                <th>Slug</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for profile in profiles %}
+            <tr>
+                <td>{{ profile.id }}</td>
+                <td>{{ profile.fullname }}</td>
+                <td>{{ profile.AccountNumber }}</td>
+                <td>{{ profile.country }}</td>
+                <td>{{ profile.address }}</td>
+                <td>{{ profile.iban }}</td>
+                <td>{{ profile.swift }}</td>
+                <td>{{ profile.balance }}</td>
+                <td>{{ profile.currency }}</td>
+                <td>{{ profile.slug }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': profile.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': profile.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_new') }}">Create new</a>
+{% endblock %}
