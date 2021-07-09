@@ -18,7 +18,7 @@ class Profile
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="fullname", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="profile", cascade={"persist", "remove"})
      */
     private $user;
 
@@ -66,6 +66,11 @@ class Profile
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    public function __toString(): string
+    { 
+        return $this->fullname;
+    }
 
     public function getId(): ?int
     {

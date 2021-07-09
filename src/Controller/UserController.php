@@ -2,14 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Profile;
 use App\Form\ProfileType;
+use App\Service\SlugText;
 use App\Repository\ProfileRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 #[Route('/user')]
 class UserController extends AbstractController
 {
@@ -22,14 +29,28 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, SlugText $slugger): Response
     {
+        $user = new User();
         $profile = new Profile();
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUsername($form->get('username')->getData());
+            if($form->get('email') !== NULL) { 
+                $user->setEmail($form->get('email')->getData());
+            }
+            $user->setPassword(
+                $passwordHasher->hashPassword($user, 'bonjour1')
+            );
+
+            $user->setRoles(["ROLE_CUSTOMER", "ROLE_USER"]);
+
+            $profile->setSlug($slugger->makeSlug($form->get('fullname')->getData()));
+            $profile->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
             $entityManager->persist($profile);
             $entityManager->flush();
 

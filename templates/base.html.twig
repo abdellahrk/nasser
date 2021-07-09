@@ -23,7 +23,23 @@
             <script src="{{ asset('js/libs/jkanban.js') }}"></script>
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="nk-body bg-lighter npc-general has-sidebar ">
+        <div class="nk-app-root">
+            <!-- main @s -->
+            <div class="nk-main ">
+                {{ include('inc/_sidebar.html.twig') }}
+                <!-- wrap @s -->
+                <div class="nk-wrap ">
+                    {{ include('inc/_main-header.html.twig') }}
+                    <!-- content @s -->
+                    <div class="nk-content ">
+                        {% block body %}{% endblock %}
+                    </div>
+                    <!-- content @e -->
+                    {{ include('inc/_footer.html.twig')}}
+                </div>
+                <!-- wrap @e -->
+            </div>
+        </div>
     </body>
 </html>
