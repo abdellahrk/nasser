@@ -6,13 +6,7 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/dashlite.css';
-import './styles/theme.css';
 
-// JS
-import './js/bundle.js';
-import './js/gd-default';
-import './js/scripts.js';
 
 // start the Stimulus application
 import './bootstrap';
