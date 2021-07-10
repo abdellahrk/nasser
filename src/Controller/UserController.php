@@ -6,7 +6,9 @@ use App\Entity\User;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 use App\Service\SlugText;
+use App\Repository\UserRepository;
 use App\Repository\ProfileRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,10 +23,17 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'user_index', methods: ['GET'])]
-    public function index(ProfileRepository $profileRepository): Response
+    public function index(ProfileRepository $profileRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $query = $profileRepository->findAll();
+
+        $users = $paginator->paginate(
+            $query, 
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('user/index.html.twig', [
-            'profiles' => $profileRepository->findAll(),
+            'profiles' => $users,
         ]);
     }
 

@@ -16,11 +16,17 @@
 
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
+            
+            <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
+            <script src="{{ asset('js/nioapp.min.js') }}"></script>
             <script src="{{ asset('js/scripts.js') }}"></script>
             <script src="{{ asset('js/bundles.js') }}"></script>
             <script src="{{ asset('js/charts/gd-default.js') }}"></script>
             <script src="{{ asset('js/apps/kanban.js') }}"></script>
+            <script src="{{ asset('js/jquery.knob.min.js') }}"></script>
             <script src="{{ asset('js/libs/jkanban.js') }}"></script>
+            <script src="{{ asset('js/prettify.js') }}"></script>
+            <script src="{{ asset('js/clipboard.min.js') }}"></script>
         {% endblock %}
     </head>
     <body class="nk-body bg-lighter npc-general has-sidebar ">
