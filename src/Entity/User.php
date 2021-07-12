@@ -146,24 +146,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFullname(): ?Profile
+    public function getProfile(): ?Profile
     {
-        return $this->fullname;
+        return $this->profile;
     }
 
-    public function setFullname(?Profile $fullname): self
+    public function setProfile(?Profile $profile): self
     {
         // unset the owning side of the relation if necessary
-        if ($fullname === null && $this->fullname !== null) {
+        if ($profile === null && $this->profile !== null) {
             $this->fullname->setUser(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($fullname !== null && $fullname->getUser() !== $this) {
-            $fullname->setUser($this);
+        if ($profile !== null && $profile->getUser() !== $this) {
+            $profile->setUser($this);
         }
 
-        $this->fullname = $fullname;
+        $this->profile = $profile;
 
         return $this;
     }

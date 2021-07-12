@@ -72,7 +72,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'user_show', methods: ['GET'])]
+    #[Route('/{slug}', name: 'user_show', methods: ['GET'])]
     public function show(Profile $profile): Response
     {
         return $this->render('user/show.html.twig', [
@@ -80,7 +80,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
+    #[Route('/{slug}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Profile $profile): Response
     {
         $form = $this->createForm(ProfileType::class, $profile);

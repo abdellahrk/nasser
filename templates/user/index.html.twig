@@ -24,9 +24,8 @@
                                             <a href="#" class="dropdown-toggle btn btn-icon btn-primary" data-toggle="dropdown"><em class="icon ni ni-plus"></em></a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><span>Add User</span></a></li>
-                                                    <li><a href="#"><span>Add Team</span></a></li>
-                                                    <li><a href="#"><span>Import User</span></a></li>
+                                                    <li><a href="{{ path('user_new') }}"><span>Ajouter Client</span></a></li>
+                                                    <li><a href="{{ path('user_index') }}"><span>Tout les clients</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -97,7 +96,7 @@
                                     </div>
                                 </div>
                                 <div class="nk-tb-col">
-                                    <a href="html/user-details-regular.html">
+                                    <a href="{{ path('user_show', {'slug': profile.slug}) }}">
                                         <div class="user-card">
                                             <div class="user-avatar bg-primary">
                                                 <span>AB</span>
@@ -149,7 +148,7 @@
                                                 <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <ul class="link-list-opt no-bdr">
-                                                        <li><a href="#"><em class="icon ni ni-focus"></em><span>Quick View</span></a></li>
+                                                        <li><a href="{{ path('user_edit', {slug: profile.slug})  }}"><em class="icon ni ni-focus"></em><span>Modifier</span></a></li>
                                                         <li><a href="#"><em class="icon ni ni-eye"></em><span>View Details</span></a></li>
                                                         <li><a href="#"><em class="icon ni ni-repeat"></em><span>Transaction</span></a></li>
                                                         <li><a href="#"><em class="icon ni ni-activity-round"></em><span>Activities</span></a></li>

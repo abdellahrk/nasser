@@ -9,28 +9,31 @@
             {#{{ encore_entry_link_tags('app') }}#}
             <link href="{{ asset('styles/dashlite.css') }}" rel="stylesheet" />
             <link href="{{ asset('styles/theme.css') }}" rel="stylesheet" />
-            {#<link href="{{ asset('styles/themify-icons.css') }}" rel="stylesheet" />#}
+            <link href="{{ asset('styles/dashlite.css') }}" rel="stylesheet" />
+            <link href="{{ asset('styles/themify-icons.css') }}" rel="stylesheet" />
             <link href="{{ asset('styles/fontawesome-icons.css') }}" rel="stylesheet" />
         {% endblock %}
 
         
     </head>
-    <body class="nk-body bg-lighter npc-general has-sidebar ">
-        <div class="nk-app-root">
-            <!-- main @s -->
-            <div class="nk-main ">
-                {{ include('inc/_sidebar.html.twig') }}
-                <!-- wrap @s -->
-                <div class="nk-wrap ">
-                    {{ include('inc/_main-header.html.twig') }}
-                    <!-- content @s -->
-                    <div class="nk-content ">
+  <body class="nk-body bg-white npc-general pg-auth">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap nk-wrap-nosidebar">
+                 <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="nk-block nk-block-middle nk-auth-body  wide-xs">
+                        
                         {% block body %}{% endblock %}
                     </div>
                     <!-- content @e -->
                     {{ include('inc/_footer.html.twig')}}
                 </div>
                 <!-- wrap @e -->
+                </div>
+                </div>
             </div>
         </div>
         {% block javascripts %}
@@ -39,7 +42,7 @@
             <script src="{{ asset('js/jquery-3.6.0.js') }}"></script>
             <script src="{{ asset('js/nioapp.min.js') }}"></script>
             
-            <script src="{{ asset('js/bundle.js') }}"></script>
+            <script src="{{ asset('js/bundles.js') }}"></script>
             <script src="{{ asset('js/scripts.js') }}"></script>
             <script src="{{ asset('js/charts/gd-default.js') }}"></script>
             <script src="{{ asset('js/apps/kanban.js') }}"></script>
