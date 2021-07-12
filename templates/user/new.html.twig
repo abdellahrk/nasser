@@ -3,9 +3,14 @@
 {% block title %}New Profile{% endblock %}
 
 {% block body %}
-    <h1>Create new Profile</h1>
-
-    {{ include('user/_form.html.twig') }}
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="components-preview wide-md mx-auto">
+                <h2 class="nk-block-title fw-normal"> Ajouter Client </h2>
+                 {{ include('user/_form.html.twig') }}
+            </div>
+        </div>
+    </div>
 
     <a href="{{ path('user_index') }}">back to list</a>
 {% endblock %}
