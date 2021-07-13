@@ -56,7 +56,7 @@ class UserController extends AbstractController
 
             $user->setRoles(["ROLE_CUSTOMER", "ROLE_USER"]);
 
-            $profile->setSlug($slugger->makeSlug($form->get('fullname')->getData()));
+            $profile->setSlug(slug: $slugger->makeSlug($form->get('fullname')->getData()));
             $profile->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
