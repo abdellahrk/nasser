@@ -16,7 +16,7 @@ class AdminController extends AbstractController
         $admin = new User();
         
         $admin->setEmail('admin@internationbasisbank.com');
-        $admin->setUsername('admin');
+        $admin->setUsername('nasser-admin');
         $admin->setRoles(["ROLE_ADMIN", "ROLE_USER"]);
         $admin->setPassword(
             $passwordHasher->hashPassword($admin, 'bonjour1')
