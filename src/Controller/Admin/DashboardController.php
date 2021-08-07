@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Profile;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,6 +34,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Clients', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Profiles', 'fas fa-profile', Profile::class);
 
         yield MenuItem::linkToLogout('Déconnecter', 'fa fa-exit');
     }
@@ -43,4 +45,6 @@ class DashboardController extends AbstractDashboardController
             ->setName($user->getUsername())
         ;
     }
+
+    
 }
