@@ -67,7 +67,7 @@ class UserController extends AbstractController
             if($attachments){ 
                 foreach($attachments as $attachment) { 
                     $attachedFile = new Attachment();
-                    $filename = $fileUploader->upload($attachment);
+                    $filename = $fileUploader->upload($attachment, $profile->getSlug());
                     $attachedFile->setFilename($filename);
                     $attachedFile->setProfile($profile);
                     $entityManager->persist($attachedFile);
