@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Entity\Profile;
 use App\Form\ProfileType;
 use App\Service\SlugText;
+use App\Entity\Attachment;
+use App\Service\FileUploader;
 use App\Repository\UserRepository;
 use App\Repository\ProfileRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -38,12 +40,13 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, SlugText $slugger): Response
+    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, SlugText $slugger, FileUploader $fileUploader): Response
     {
         $user = new User();
         $profile = new Profile();
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setUsername($form->get('username')->getData());
@@ -58,7 +61,19 @@ class UserController extends AbstractController
 
             $profile->setSlug(slug: $slugger->makeSlug($form->get('fullname')->getData()));
             $profile->setUser($user);
-            $entityManager = $this->getDoctrine()->getManager();
+
+            $attachments = $form->get('documents')->getData();
+
+            if($attachments){ 
+                foreach($attachments as $attachment) { 
+                    $attachedFile = new Attachment();
+                    $filename = $fileUploader->upload($attachment);
+                    $attachedFile->setFilename($filename);
+                    $attachedFile->setProfile($profile);
+                    $entityManager->persist($attachedFile);
+                }
+            }
+
             $entityManager->persist($user);
             $entityManager->persist($profile);
             $entityManager->flush();

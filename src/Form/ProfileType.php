@@ -4,9 +4,10 @@ namespace App\Form;
 
 use App\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Currency;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
@@ -20,8 +21,10 @@ class ProfileType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'mapped' => false,
+                'label' => 'Code Switf',
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -32,16 +35,19 @@ class ProfileType extends AbstractType
                 ]
             ])
             ->add('fullname', TextType::class, [
+                'label' => 'Nom complet',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('AccountNumber', IntegerType::class, [
+                'label' => 'Numéro compte',
                 'attr' => [
                     'class' => 'form-control'
                 ]
             ])
             ->add('country', CountryType::class, [
+                'label' => 'Pays',
                 'attr' => [
                     'class' => 'form-control'
                 ]
@@ -62,16 +68,35 @@ class ProfileType extends AbstractType
                 ]
             ])
             ->add('balance', IntegerType::class, [
-                'required' => false,
+                'label' => 'Montant',
+                'required' => true,
                 'attr' => [
                     'class' => 'form-control'
                 ]
 
             ])
+            ->add('motif', CKEditorType::class, [
+                'attr' => [
+                    'class' => 'form-control '
+                ]
+            ])
+            ->add('autres', CKEditorType::class, [
+                'attr' => [
+                    'class' => 'form-control '
+                ]
+            ])
             ->add('currency', CurrencyType::class, [
                 'attr' => [
                     'class' => 'form-control'
                 ]
+            ])
+            ->add('documents', FileType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'mapped' => false,
+                'multiple' => true,
+                'required' => false,
             ])
         ;
     }

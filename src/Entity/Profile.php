@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProfileRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,7 +30,7 @@ class Profile
     private $fullname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
     private $AccountNumber;
 
@@ -66,6 +68,26 @@ class Profile
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $motif;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $autres;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Attachment::class, mappedBy="profile", orphanRemoval=true)
+     */
+    private $attachments;
+
+    public function __construct()
+    {
+        $this->attachments = new ArrayCollection();
+    }
 
     public function __toString(): string
     { 
@@ -193,6 +215,60 @@ class Profile
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getMotif(): ?string
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(?string $motif): self
+    {
+        $this->motif = $motif;
+
+        return $this;
+    }
+
+    public function getAutres(): ?string
+    {
+        return $this->autres;
+    }
+
+    public function setAutres(?string $autres): self
+    {
+        $this->autres = $autres;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Attachment[]
+     */
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
+    }
+
+    public function addAttachment(Attachment $attachment): self
+    {
+        if (!$this->attachments->contains($attachment)) {
+            $this->attachments[] = $attachment;
+            $attachment->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAttachment(Attachment $attachment): self
+    {
+        if ($this->attachments->removeElement($attachment)) {
+            // set the owning side to null (unless already changed)
+            if ($attachment->getProfile() === $this) {
+                $attachment->setProfile(null);
+            }
+        }
 
         return $this;
     }
