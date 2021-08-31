@@ -7,8 +7,8 @@
         </div>
         <div class="nk-sidebar-brand">
             <a href="html/index.html" class="logo-link nk-sidebar-logo">
-                <img class="logo-light logo-img" src="./images/logo.png" srcset="./images/logo2x.png 2x" alt="logo">
-                <img class="logo-dark logo-img" src="./images/logo-dark.png" srcset="./images/logo-dark2x.png 2x" alt="logo-dark">
+                <img class="logo-light logo-img" src="{{ asset('images/logo.png') }}" srcset="{{ asset('images/logo2x.png 2x') }}" alt="logo">
+                <img class="logo-dark logo-img" src="{{ asset('images/logo-dark.png') }}" srcset="{{ asset('images/logo-dark2x.png 2x') }}" alt="logo-dark">
             </a>
         </div>
     </div><!-- .nk-sidebar-element -->
@@ -132,20 +132,22 @@
 
                 {% if is_granted("ROLE_CUSTOMER") %}
                     <li class="nk-menu-heading">
-                        <h6 class="overline-title text-primary-alt">Misc Pages</h6>
+                        <h6 class="overline-title text-primary-alt">Internation Bank</h6>
                     </li><!-- .nk-menu-heading -->
                     <li class="nk-menu-item has-sub">
                         <a href="#" class="nk-menu-link nk-menu-toggle">
                             <span class="nk-menu-icon"><em class="icon ni ni-signin"></em></span>
-                            <span class="nk-menu-text">Auth Pages</span>
+                            <span class="nk-menu-text">Menu</span>
                         </a>
                         <ul class="nk-menu-sub">
                             <li class="nk-menu-item">
-                                <a href="html/pages/auths/auth-login.html" class="nk-menu-link" target="_blank"><span class="nk-menu-text">Login / Signin</span></a>
+                                <a href="{{ path('app_dashboard') }}" class="nk-menu-link"><span class="nk-menu-text">Home</span></a>
                             </li>
+                            
                             <li class="nk-menu-item">
-                                <a href="html/pages/auths/auth-register.html" class="nk-menu-link" target="_blank"><span class="nk-menu-text">Register / Signup</span></a>
+                                <a href="{{ path('app_account') }}" class="nk-menu-link" ><span class="nk-menu-text">My Account</span></a>
                             </li>
+                            {#
                             <li class="nk-menu-item">
                                 <a href="html/pages/auths/auth-reset.html" class="nk-menu-link" target="_blank"><span class="nk-menu-text">Forgot Password</span></a>
                             </li>
@@ -185,50 +187,7 @@
                                         <a href="html/pages/auths/auth-success-v3.html" class="nk-menu-link" target="_blank"><span class="nk-menu-text">Success / Confirm</span></a>
                                     </li>
                                 </ul>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
-                            <span class="nk-menu-text">Error Pages</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/pages/errors/404-classic.html" target="_blank" class="nk-menu-link"><span class="nk-menu-text">404 Classic</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/errors/504-classic.html" target="_blank" class="nk-menu-link"><span class="nk-menu-text">504 Classic</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/errors/404-s1.html" target="_blank" class="nk-menu-link"><span class="nk-menu-text">404 Modern</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/errors/504-s1.html" target="_blank" class="nk-menu-link"><span class="nk-menu-text">504 Modern</span></a>
-                            </li>
-                        </ul><!-- .nk-menu-sub -->
-                    </li><!-- .nk-menu-item -->
-                    <li class="nk-menu-item has-sub">
-                        <a href="#" class="nk-menu-link nk-menu-toggle">
-                            <span class="nk-menu-icon"><em class="icon ni ni-files"></em></span>
-                            <span class="nk-menu-text">Other Pages</span>
-                        </a>
-                        <ul class="nk-menu-sub">
-                            <li class="nk-menu-item">
-                                <a href="html/_blank.html" class="nk-menu-link"><span class="nk-menu-text">Blank / Startup</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/faqs.html" class="nk-menu-link"><span class="nk-menu-text">Faqs / Help</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/terms-policy.html" class="nk-menu-link"><span class="nk-menu-text">Terms / Policy</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/regular-v1.html" class="nk-menu-link"><span class="nk-menu-text">Regular Page - v1</span></a>
-                            </li>
-                            <li class="nk-menu-item">
-                                <a href="html/pages/regular-v2.html" class="nk-menu-link"><span class="nk-menu-text">Regular Page - v2</span></a>
-                            </li>
+                            </li>#}
                         </ul><!-- .nk-menu-sub -->
                     </li><!-- .nk-menu-item -->
                 {% endif %}

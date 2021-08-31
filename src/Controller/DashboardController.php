@@ -19,4 +19,12 @@ class DashboardController extends AbstractController
             'controller_name' => 'DashboardController',
         ]);
     }
+
+    #[Route('/my-account', name: 'app_account')]
+    public function profile(): Response
+    { 
+        return $this->render('dashboard/profile/profile.html.twig', [
+
+        ]);
+    }
 }
