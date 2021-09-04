@@ -6,6 +6,7 @@
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
 
+{% if is_granted('APP_CUSTOMER') %}
 <div class="container-fluid">
     <div class="nk-content-inner">
         <div class="nk-content-body">
@@ -190,7 +191,7 @@
         </div>
     </div>
 </div>
-
+{% endif %}
 </body>
 
 
