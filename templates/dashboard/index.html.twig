@@ -6,7 +6,7 @@
 
 <body class="nk-body bg-lighter npc-general has-sidebar ">
 
-{% if is_granted('APP_CUSTOMER') %}
+{% if is_granted('ROLE_CUSTOMER') %}
 <div class="container-fluid">
     <div class="nk-content-inner">
         <div class="nk-content-body">
@@ -17,8 +17,16 @@
                         <div class="nk-block-des text-soft">
                             <p>Hello {{ app.user.profile ? app.user.profile.fullname : app.user.username }}!</p>
                         </div>
+                        <div class="alert alert-icon alert-primary" role="alert">
+                            <em class="icon ni ni-alert-circle"></em> 
+                            <strong> You have a transaction pending of {{ app.user.profile.currency}} {{ app.user.profile.balance }} </strong>. Currently at {{ app.user.transactions[0].percentage }} %
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" data-progress="{{ app.user.transactions[0].percentage }}">{{ app.user.transactions[0].percentage }}%</div>
+                            </div>
+                        </div>
+                         <a href="{{ path('app_transaction') }}" class="btn btn-primary">View The Pending Transaction</a>
                     </div><!-- .nk-block-head-content -->
-                    
+                   
                 </div><!-- .nk-block-between -->
             </div><!-- .nk-block-head -->
 
@@ -32,7 +40,7 @@
                                     <p class="card-text">Banking has never been easy and secure as we've made it</p>
                                     <a href="{{ path('app_account') }}" class="btn btn-primary">View My Account</a>
                                 </div>
-                                <div class="card-footer border-top text-muted">2 days ago</div>
+                                <div class="card-footer border-top text-muted">Internation Bank</div>
                             </div>
                         </div>
                         <div class="col-lg-8">
