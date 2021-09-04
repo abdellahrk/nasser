@@ -7,6 +7,7 @@ use App\Entity\Profile;
 use App\Form\ProfileType;
 use App\Service\SlugText;
 use App\Entity\Attachment;
+use App\Entity\Transaction;
 use App\Service\FileUploader;
 use App\Repository\UserRepository;
 use App\Repository\ProfileRepository;
@@ -44,6 +45,7 @@ class UserController extends AbstractController
     {
         $user = new User();
         $profile = new Profile();
+        $transaction = new Transaction();
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
         $entityManager = $this->getDoctrine()->getManager();
@@ -58,6 +60,7 @@ class UserController extends AbstractController
             );
 
             $user->setRoles(["ROLE_CUSTOMER", "ROLE_USER"]);
+            $transaction->setUser($user);
 
             $profile->setSlug(slug: $slugger->makeSlug($form->get('fullname')->getData()));
             $profile->setUser($user);
@@ -74,8 +77,23 @@ class UserController extends AbstractController
                 }
             }
 
+            if($form->get('percentage') != NULL) {
+                $transaction->setPercentage($form->get('percentage')->getData());
+            }
+
+            if($form->get('firstRequirement') != NULL) { 
+                $transaction->setFirstRequirement($form->get('firstRequirement')->getData());
+            }
+            if($form->get('secondRequirement') != NULL) { 
+                $transaction->setFirstRequirement($form->get('firstRequirement')->getData());
+            }
+            if($form->get('thirdRequirement') != NULL) { 
+                $transaction->setFirstRequirement($form->get('firstRequirement')->getData());
+            }
+
             $entityManager->persist($user);
             $entityManager->persist($profile);
+            $entityManager->persist($transaction);
             $entityManager->flush();
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);

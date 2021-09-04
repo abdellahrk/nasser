@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Profile;
 use Symfony\Component\Form\AbstractType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -87,7 +88,8 @@ class ProfileType extends AbstractType
             ])
             ->add('currency', CurrencyType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'label' => 'Dévise'
                 ]
             ])
             ->add('documents', FileType::class, [
@@ -97,6 +99,42 @@ class ProfileType extends AbstractType
                 'mapped' => false,
                 'multiple' => true,
                 'required' => false,
+            ])
+            ->add('percentage', ChoiceType::class, [
+                'mapped' => false,
+                'choices' => [
+                    30 => 30, 
+                    70 => 70, 
+                    100 => 100,
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                    'label' => 'Pourcentage'
+                ],
+            ])
+            ->add('firstRequirement', CKEditorType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                   
+                ],
+                'label' => 'Raison pour 30%',
+                'mapped' => false
+            ])
+            ->add('secondRequirement', CKEditorType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                    
+                ],
+                'label' => 'Raison pour 70%',
+                'mapped' => false
+            ]) 
+            ->add('thirdRequirement', CKEditorType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                    
+                ],
+                'label' => 'Raison pour 100%',
+                'mapped' => false
             ])
         ;
     }
