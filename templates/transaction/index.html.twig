@@ -17,7 +17,8 @@
                                 <p class="lead">You have an ongoing transaction</p>
                             </div>
                         </div>
-                    </div><!-- .nk-block-head -->
+                    </div>
+                    <!-- .nk-block-head -->
                     <div class="nk-block">
                         <div class="card card-bordered">
                             <div class="card-inner card-inner-xl">
@@ -29,6 +30,9 @@
                     <div class="nk-block">
                       <div class="card card-bordered">
                         <div class="card-inner card-inner-xl">
+                          <div class="nk-block-head-content text-center mb-5">
+                            <h4 class="nk-block-title fw-normal">Information Expéditeur</h4>
+                          </div>
                           <table class="table table-hover">
                             <thead>
                               <tr>
@@ -50,19 +54,78 @@
                                 <td>{{ user.transactions[0].senderCountry }}</td>
                                 
                               </tr>
-                              {% if is not empty user.transactions[0].senderBank %}
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>Banque Expéditeur</td>
-                                <td>{{ user.transactions[0].senderBank }}</td>
-                                
-                              </tr>
+                              {% if user.transactions[0].senderBank  is not empty %}
+                                <tr>
+                                  <th scope="row">3</th>
+                                  <td>Banque Expéditeur</td>
+                                  <td>{{ user.transactions[0].senderBank }}</td>
+                                  
+                                </tr>
                               {% endif %}
                             </tbody>
                           </table>
                         </div>
                       </div>
                     </div>
+
+                    <div class="nk-block">
+                      <div class="card card-bordered">
+                        <div class="card-inner card-inner-xl">
+                          <div class="nk-block-head-content text-center mb-5">
+                            <h4 class="nk-block-title fw-normal">Information  Destinataire</h4>
+                          </div>
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Valeur</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Nom Destinataire</td>
+                                <td>{{ user.profile.fullname }}</td>
+                                
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Amount</td>
+                                <td>{{ user.profile.currency }} {{ user.profile.balance }}</td>
+                                
+                              </tr>
+                              
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>Swift</td>
+                                <td>{{ user.profile.swift }}</td>
+                                
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- .nk-block-head -->
+                    <div class="nk-block">
+                        <div class="card card-bordered">
+                            <div class="card-inner card-inner-xl">
+                                <div class="nk-block-head-content text-center">
+                                  <div class="nk-block-head-content text-center mb-5">
+                                    <h4 class="nk-block-title fw-normal">Reason</h4>
+                                  </div>
+
+                                  <div class="text-center">
+                                    <p>{{ user.profile.motif|raw }}</p>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .nk-block -->
+
                 </div><!-- .content-page -->
             </div>
         </div>
