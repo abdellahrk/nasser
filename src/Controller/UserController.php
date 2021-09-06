@@ -120,13 +120,25 @@ class UserController extends AbstractController
     }
 
     #[Route('/{slug}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Profile $profile): Response
+    public function edit(Request $request, Profile $profile, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(ProfileType::class, $profile);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $attachments = $form->get('documents')->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            if($attachments){ 
+                foreach($attachments as $attachment) { 
+                    $attachedFile = new Attachment();
+                    $filename = $fileUploader->upload($attachment, $profile->getSlug());
+                    $attachedFile->setFilename($filename);
+                    $attachedFile->setProfile($profile);
+                    $entityManager->persist($attachedFile);
+                }
+            }
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
