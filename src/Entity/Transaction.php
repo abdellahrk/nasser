@@ -43,6 +43,21 @@ class Transaction
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sender;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $senderCountry;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $senderBank;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +119,42 @@ class Transaction
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSender(): ?string
+    {
+        return $this->sender;
+    }
+
+    public function setSender(string $sender): self
+    {
+        $this->sender = $sender;
+
+        return $this;
+    }
+
+    public function getSenderCountry(): ?string
+    {
+        return $this->senderCountry;
+    }
+
+    public function setSenderCountry(string $senderCountry): self
+    {
+        $this->senderCountry = $senderCountry;
+
+        return $this;
+    }
+
+    public function getSenderBank(): ?string
+    {
+        return $this->senderBank;
+    }
+
+    public function setSenderBank(?string $senderBank): self
+    {
+        $this->senderBank = $senderBank;
 
         return $this;
     }

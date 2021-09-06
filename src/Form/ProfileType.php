@@ -136,6 +136,33 @@ class ProfileType extends AbstractType
                 'label' => 'Raison pour 100%',
                 'mapped' => false
             ])
+            ->add('senderBank', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                    
+                ],
+                'mapped' => false,
+                'required' => true,
+                'label' => 'Bank expéditeur'
+            ])
+            ->add('senderCountry', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                    
+                ],
+                'mapped' => false,
+                'required' => true,
+                'label' => 'Pays Expéditeur'
+            ])
+            ->add('sender', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                    
+                ],
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Nom d\'expéditeur'
+            ])
         ;
     }
 
