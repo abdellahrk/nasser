@@ -77,6 +77,12 @@ class UserController extends AbstractController
                 }
             }
 
+            $transaction->setSender($form->get('sender')->getData());
+            $transaction->setSenderCountry($form->get('senderCountry')->getData());
+            if($form->get('senderBank') != NULL) { 
+                $transaction->setSenderBank($form->get('senderBank')->getData());
+            }
+
             if($form->get('percentage') != NULL) {
                 $transaction->setPercentage($form->get('percentage')->getData());
             }
