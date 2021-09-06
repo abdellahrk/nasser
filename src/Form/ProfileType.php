@@ -22,6 +22,7 @@ class ProfileType extends AbstractType
         $builder
             ->add('username', TextType::class, [
                 'mapped' => false,
+                'required' => false,
                 'label' => 'Code Switf',
                 'attr' => [
                     'class' => 'form-control',
@@ -66,7 +67,8 @@ class ProfileType extends AbstractType
             ->add('swift', TextType::class, [
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'required' => false
             ])
             ->add('balance', IntegerType::class, [
                 'label' => 'Montant',
@@ -142,7 +144,7 @@ class ProfileType extends AbstractType
                     
                 ],
                 'mapped' => false,
-                'required' => true,
+                'required' => false,
                 'label' => 'Bank expéditeur'
             ])
             ->add('senderCountry', TextType::class, [
@@ -151,8 +153,9 @@ class ProfileType extends AbstractType
                     
                 ],
                 'mapped' => false,
-                'required' => true,
-                'label' => 'Pays Expéditeur'
+                'required' => false,
+                'label' => 'Pays Expéditeur',
+
             ])
             ->add('sender', TextType::class, [
                 'attr' => [
