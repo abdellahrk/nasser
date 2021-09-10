@@ -29,7 +29,7 @@
                                     <div class="card-inner">
                                       <div class="nk-block-head-content text-center mb-4 ">
                                         <h4 class="nk-block-title fw-normal">Status</h4>
-                                        <p>Your transfer is currently blocked at 30%. To get full access to your funds, please do fulfill the 
+                                        <p>Your transfer is currently blocked at {{ user.transactions[0].percentage }}%. To get full access to your funds, please do fulfill the 
                                           requirement listed.
                                         </p>
                                       </div>
@@ -50,8 +50,8 @@
                                 </div>
 
                                 <div class="col-lx-8 col-sm-8 col-lg-8 col-md-8">
-                                  <div class="card ">
-                                    <div class="card-inner">
+                                  <div class="card bg-pink">
+                                    <div class="card-inner text-white">
                                       <div class="nk-block-head-content text-center mb-4">
                                         <h4 class="nk-block-title fw-normal">Requirements</h4>
                                       </div>
@@ -86,27 +86,27 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Valeur</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Value</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <th scope="row">1</th>
-                                <td>Nom Expéditeur</td>
+                                <td>Sender's Name</td>
                                 <td>{{ user.transactions[0].sender }}</td>
                                 
                               </tr>
                               <tr>
                                 <th scope="row">2</th>
-                                <td>Pays Expéditeur</td>
+                                <td>Sender's Country</td>
                                 <td>{{ user.transactions[0].senderCountry }}</td>
                                 
                               </tr>
                               {% if user.transactions[0].senderBank  is not empty %}
                                 <tr>
                                   <th scope="row">3</th>
-                                  <td>Banque Expéditeur</td>
+                                  <td>Sender's Bank</td>
                                   <td>{{ user.transactions[0].senderBank }}</td>
                                   
                                 </tr>
@@ -127,14 +127,14 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Valeur</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Value</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <th scope="row">1</th>
-                                <td>Nom Destinataire</td>
+                                <td>Receiver's Name</td>
                                 <td>{{ user.profile.fullname }}</td>
                                 
                               </tr>
@@ -160,8 +160,8 @@
                     <!-- .nk-block-head -->
                     <div class="nk-block">
                         <div class="card card-bordered">
-                            <div class="card-inner card-inner-xl">
-                                <div class="nk-block-head-content text-center">
+                            <div class="card-inner card-inner-xl bg-teal">
+                                <div class="nk-block-head-content text-center text-white">
                                   {% if user.profile.motif is not empty %}
                                     <div class="nk-block-head-content text-center mb-5">
                                       <h4 class="nk-block-title fw-normal">Reason</h4>
