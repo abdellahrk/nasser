@@ -34,3 +34,13 @@ services:
         arguments: [~, 'App\Entity\User', ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Client }
+    admin.profile:
+        class: App\Admin\ProfileAdmin
+        arguments: [ ~, 'App\Entity\Profile', ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Profile }
+    admin.transaction:
+        class: App\Admin\TransactionAdmin
+        arguments: [ ~, 'App\Entity\Transaction', ~ ]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Transaction }

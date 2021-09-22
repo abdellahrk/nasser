@@ -19,9 +19,9 @@
                         </div>
                         <div class="alert alert-icon alert-primary" role="alert">
                             <em class="icon ni ni-alert-circle"></em> 
-                            <strong> You have a transaction pending of {{ app.user.profile.currency}} {{ app.user.profile.balance }} </strong>. Currently at {{ app.user.transactions[0].percentage }} %
+                            <strong> You have a transaction pending of {{ app.user.profile.currency}} {{ app.user.profile.balance }} </strong>. Currently at {{ app.user.transaction.percentage }} %
                             <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" data-progress="{{ app.user.transactions[0].percentage }}">{{ app.user.transactions[0].percentage }}%</div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" data-progress="{{ app.user.transaction.percentage }}">{{ app.user.transaction.percentage }}%</div>
                             </div>
                         </div>
                          <a href="{{ path('app_transaction') }}" class="btn btn-primary">View The Pending Transaction</a>

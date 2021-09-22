@@ -48,9 +48,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $profile;
 
     /**
-     * @ORM\OneToMany(targetEntity=Transaction::class, mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToOne(targetEntity=Transaction::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private $transactions;
+    private $transaction;
 
     public function __construct()
     {
@@ -180,33 +180,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Transaction[]
-     */
-    public function getTransactions(): Collection
+    public function getTransaction(): ?Transaction
     {
-        return $this->transactions;
+        return $this->transaction;
     }
 
-    public function addTransaction(Transaction $transaction): self
+    public function setTransaction(?Transaction $transaction): self
     {
-        if (!$this->transactions->contains($transaction)) {
-            $this->transactions[] = $transaction;
+        // unset the owning side of the relation if necessary
+        if ($transaction === null && $this->transaction !== null) {
+            $this->transaction->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($transaction !== null && $transaction->getUser() !== $this) {
             $transaction->setUser($this);
         }
 
-        return $this;
-    }
-
-    public function removeTransaction(Transaction $transaction): self
-    {
-        if ($this->transactions->removeElement($transaction)) {
-            // set the owning side to null (unless already changed)
-            if ($transaction->getUser() === $this) {
-                $transaction->setUser(null);
-            }
-        }
+        $this->transaction = $transaction;
 
         return $this;
     }
+
 }

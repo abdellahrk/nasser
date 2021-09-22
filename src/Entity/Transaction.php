@@ -38,12 +38,6 @@ class Transaction
     private $thirdRequirement;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="transactions")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $sender;
@@ -57,6 +51,11 @@ class Transaction
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $senderBank;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="transaction", cascade={"persist", "remove"})
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -111,18 +110,6 @@ class Transaction
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getSender(): ?string
     {
         return $this->sender;
@@ -155,6 +142,18 @@ class Transaction
     public function setSenderBank(?string $senderBank): self
     {
         $this->senderBank = $senderBank;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

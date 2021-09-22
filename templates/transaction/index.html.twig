@@ -29,13 +29,13 @@
                                     <div class="card-inner">
                                       <div class="nk-block-head-content text-center mb-4 ">
                                         <h4 class="nk-block-title fw-normal">Status</h4>
-                                        <p>Your transfer is currently blocked at {{ user.transactions[0].percentage }}%. To get full access to your funds, please do fulfill the 
+                                        <p>Your transfer is currently blocked at {{ user.transaction.percentage }}%. To get full access to your funds, please do fulfill the
                                           requirement listed.
                                         </p>
                                       </div>
                                       
                                       <div class="progress progress-lg">
-                                          <div class="progress-bar" data-progress="{{ user.transactions[0].percentage }}">{{ user.transactions[0].percentage }}%</div>
+                                          <div class="progress-bar" data-progress="{{ user.transaction.percentage }}">{{ user.transaction.percentage }}%</div>
                                       </div>
 
                                       <div class="user-balance mt-3">
@@ -56,16 +56,16 @@
                                         <h4 class="nk-block-title fw-normal">Requirements</h4>
                                       </div>
 
-                                      {% if user.transactions[0].percentage is same as(30) %}
-                                        {{ user.transactions[0].firstRequirement|raw }}
+                                      {% if user.transaction.percentage is same as(30) %}
+                                        {{ user.transaction.firstRequirement|raw }}
                                       {% endif %}
 
-                                      {% if user.transactions[0].percentage is same as(70) %}
-                                        {{ user.transactions[0].secondRequirement|raw }}
+                                      {% if user.transaction.percentage is same as(70) %}
+                                        {{ user.transaction.secondRequirement|raw }}
                                       {% endif %}
 
-                                      {% if user.transactions[0].percentage is same as(30) %}
-                                        {{ user.transactions[0].thirdRequirement|raw }}
+                                      {% if user.transaction.percentage is same as(30) %}
+                                        {{ user.transaction.thirdRequirement|raw }}
                                       {% endif %}
                                     </div>
                                   </div>
@@ -94,20 +94,20 @@
                               <tr>
                                 <th scope="row">1</th>
                                 <td>Sender's Name</td>
-                                <td>{{ user.transactions[0].sender }}</td>
+                                <td>{{ user.transaction.sender }}</td>
                                 
                               </tr>
                               <tr>
                                 <th scope="row">2</th>
                                 <td>Sender's Country</td>
-                                <td>{{ user.transactions[0].senderCountry }}</td>
+                                <td>{{ user.transaction.senderCountry }}</td>
                                 
                               </tr>
-                              {% if user.transactions[0].senderBank  is not empty %}
+                              {% if user.transaction.senderBank  is not empty %}
                                 <tr>
                                   <th scope="row">3</th>
                                   <td>Sender's Bank</td>
-                                  <td>{{ user.transactions[0].senderBank }}</td>
+                                  <td>{{ user.transaction.senderBank }}</td>
                                   
                                 </tr>
                               {% endif %}
