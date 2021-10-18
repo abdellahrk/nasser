@@ -113,7 +113,7 @@ class UserAdmin extends AbstractAdmin
 
     protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
     {
-        $query = parent::configureQuery($query);git
+        $query = parent::configureQuery($query);
 
         $role = 'ROLE_CUSTOMER';
         $query->andWhere($query->expr()->like('o.roles', ':param'))
