@@ -8,6 +8,7 @@ use App\Entity\Transaction;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
@@ -109,4 +110,16 @@ class UserAdmin extends AbstractAdmin
         );
         $user->setRoles(['ROLE_CUSTOMER', 'ROLE_USER']);
     }
+
+    protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
+    {
+        $query = parent::configureQuery($query);git
+
+        $role = 'ROLE_CUSTOMER';
+        $query->andWhere($query->expr()->like('o.roles', ':param'))
+            ->setParameter('param', "%$role%")
+        ;
+        return $query;
+    }
+
 }
