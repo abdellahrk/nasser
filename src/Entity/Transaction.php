@@ -57,6 +57,11 @@ class Transaction
      */
     private $user;
 
+    public function __toString(): string
+    {
+        return $this->sender;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
