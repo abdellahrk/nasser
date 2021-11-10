@@ -40,6 +40,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    /*
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserPasswordHasherInterface $passwordHasher, SlugText $slugger, FileUploader $fileUploader): Response
     {
@@ -110,6 +111,7 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+    */
 
     #[Route('/{slug}', name: 'user_show', methods: ['GET'])]
     public function show(Profile $profile): Response

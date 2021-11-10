@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class TransactionAdmin extends AbstractAdmin
@@ -28,24 +29,21 @@ class TransactionAdmin extends AbstractAdmin
                     'placeholder' => 'Pourcentage'
                 ]
             ])
-            ->add('firstRequirement', CKEditorType::class, [
+            ->add('firstRequirement', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control ',
-
                 ],
                 'label' => 'Raison pour 30%',
             ])
-            ->add('secondRequirement', CKEditorType::class, [
+            ->add('secondRequirement', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control ',
-
                 ],
                 'label' => 'Raison pour 70%',
             ])
-            ->add('thirdRequirement', CKEditorType::class, [
+            ->add('thirdRequirement', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control ',
-
                 ],
                 'label' => 'Raison pour 100%',
             ])
