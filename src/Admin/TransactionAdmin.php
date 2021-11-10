@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use function Sodium\add;
 
 class TransactionAdmin extends AbstractAdmin
 {
@@ -90,6 +91,7 @@ class TransactionAdmin extends AbstractAdmin
             ->addIdentifier('sender', null, ['label' => 'Expéditeur'])
             ->add('percentage', null, ['label' => 'Pourcentaqe'])
             ->add('senderBank', null, ['label' => 'Banque'])
+            ->add('user')
         ;
     }
 
