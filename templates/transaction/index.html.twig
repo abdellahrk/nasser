@@ -64,7 +64,7 @@
                                         {{ user.transaction.secondRequirement|raw }}
                                       {% endif %}
 
-                                      {% if user.transaction.percentage is same as(30) %}
+                                      {% if user.transaction.percentage is same as(100) %}
                                         {{ user.transaction.thirdRequirement|raw }}
                                       {% endif %}
                                     </div>
@@ -187,7 +187,7 @@
                     </div>
                     <!-- .nk-block -->
 
-                    {#% if user.profile.attachments is not empty %#}
+                    {% if user.profile.attachments is not empty %}
                       <!-- .nk-block-head -->
                       <div class="nk-block">
                           <div class="card card-bordered">
@@ -240,7 +240,7 @@
                           </div>
                       </div>
                       <!-- .nk-block -->
-                    {#% endif %#}
+                    {% endif %}
 
                 </div><!-- .content-page -->
             </div>
