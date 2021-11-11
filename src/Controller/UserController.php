@@ -11,6 +11,7 @@ use App\Entity\Transaction;
 use App\Service\FileUploader;
 use App\Repository\UserRepository;
 use App\Repository\ProfileRepository;
+use AbdellahRamadan\String\Strings;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,9 +20,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-/**
- * @IsGranted("ROLE_ADMIN")
- */
+#[IsGranted('ROLE_ADMIN')]
 #[Route('/user')]
 class UserController extends AbstractController
 {
@@ -39,7 +38,6 @@ class UserController extends AbstractController
             'profiles' => $users,
         ]);
     }
-
 
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserPasswordHasherInterface $passwordHasher, SlugText $slugger, FileUploader $fileUploader): Response
@@ -63,7 +61,7 @@ class UserController extends AbstractController
             $user->setRoles(["ROLE_CUSTOMER", "ROLE_USER"]);
             $transaction->setUser($user);
 
-            $profile->setSlug(slug: $slugger->makeSlug($form->get('fullname')->getData()));
+            $profile->setSlug(Strings::slug($form->get('fullname')->getData()));
             $profile->setUser($user);
 
             $attachments = $form->get('documents')->getData();
@@ -111,7 +109,6 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
-
 
     #[Route('/{slug}', name: 'user_show', methods: ['GET'])]
     public function show(Profile $profile): Response
