@@ -99,7 +99,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->persist($profile);
             $entityManager->persist($transaction);
-            //$entityManager->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
         }
