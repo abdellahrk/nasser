@@ -5,26 +5,30 @@ namespace App\Admin;
 
 use App\Entity\Profile;
 use App\Entity\Transaction;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserAdmin extends AbstractAdmin
 {
     private $passwordHasher;
+    private MailerInterface $mailer;
 
-    public function __construct(string $code, string $class, string $baseControllerName, UserPasswordHasherInterface $passwordHasher)
+    public function __construct(string $code, string $class, string $baseControllerName, UserPasswordHasherInterface $passwordHasher, MailerInterface $mailer)
     {
         parent::__construct($code, $class, $baseControllerName);
 
         $this->passwordHasher = $passwordHasher;
+        $this->mailer = $mailer;
     }
 
     public function configureFormFields(FormMapper $form): void
@@ -110,6 +114,23 @@ class UserAdmin extends AbstractAdmin
                 $this->passwordHasher->hashPassword($user, 'bonjour1')
         );
         $user->setRoles(['ROLE_CUSTOMER', 'ROLE_USER']);
+    }
+
+    public function postPersist(object $user): void 
+    {
+        parent::postPersist($user);
+
+        $email = (new TemplatedEmail())
+            ->from('no-reply@eastwest-financial.com')
+            ->to($user->getEmail())
+            ->subject('Pending Bank Transaction') // to do
+            ->htmlTemplate('emails/new_transaction.twig')
+            ->context([
+                'user' => $user
+            ])
+        ;
+        
+        $this->mailer->send($email);
     }
 
     protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface

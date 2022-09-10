@@ -2,35 +2,39 @@
 
 namespace App\Admin;
 
+use App\Service\SlugText;
 use App\Entity\Attachment;
 use App\Service\FileUploader;
-use App\Service\SlugText;
-use Doctrine\ORM\EntityManagerInterface;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
-use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+use Doctrine\ORM\EntityManagerInterface;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
+use Symfony\Component\Mailer\MailerInterface;
 
 class ProfileAdmin extends AbstractAdmin
 {
     private $slugger;
     private $fileUploader;
     private $entityManager;
+    private MailerInterface $mailer;
 
-    public function __construct(string $code, string $class, string $baseControllerName, SlugText $slugger, FileUploader $fileUploader, EntityManagerInterface $entityManager)
+    public function __construct(string $code, string $class, string $baseControllerName, SlugText $slugger, FileUploader $fileUploader, EntityManagerInterface $entityManager, MailerInterface $mailer)
     {
         parent::__construct($code, $class, $baseControllerName);
 
         $this->slugger = $slugger;
         $this->fileUploader = $fileUploader;
         $this->entityManager = $entityManager;
+        $this->mailer = $mailer;
     }
 
     public function configureFormFields(FormMapper $form): void
@@ -167,6 +171,15 @@ class ProfileAdmin extends AbstractAdmin
             $this->entityManager->flush();
         }
 
+    }
+
+    public function postPersist(object $profile): void 
+    {
+        parent::postPersist($profile);
+        $user = $profile->getUser();
+
+
+        
     }
 
     public function preUpdate(object $profile): void
