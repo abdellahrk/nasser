@@ -23,7 +23,10 @@ class TransactionAdmin extends AbstractAdmin
                 'label' => 'Pourcentage',
                 'choices' => [
                     '30' => 30,
+                    '50' => 50,
                     '70' => 70,
+                    '80' => 80,
+                    '90' => 90,
                     '100' => 100
                 ],
                 'attr' => [
@@ -36,11 +39,30 @@ class TransactionAdmin extends AbstractAdmin
                 ],
                 'label' => 'Raison pour 30%',
             ])
+            ->add('motif_50_pourcent', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                ],
+                'label' => 'Raison pour 50%',
+            ])
             ->add('secondRequirement', TextareaType::class, [
                 'attr' => [
                     'class' => 'form-control ',
                 ],
                 'label' => 'Raison pour 70%',
+            ])
+
+            ->add('motif_80_pourcent', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                ],
+                'label' => 'Raison pour 80%',
+            ])
+            ->add('motif_90_pourcent', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control ',
+                ],
+                'label' => 'Raison pour 90%',
             ])
             ->add('thirdRequirement', TextareaType::class, [
                 'attr' => [

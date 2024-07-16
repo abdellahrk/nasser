@@ -57,6 +57,21 @@ class Transaction
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $motif_80_pourcent;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $motif_90_pourcent;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $motif_50_pourcent;
+
     public function __toString(): string
     {
         return $this->sender;
@@ -159,6 +174,42 @@ class Transaction
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getMotif80Pourcent(): ?string
+    {
+        return $this->motif_80_pourcent;
+    }
+
+    public function setMotif80Pourcent(?string $motif_80_pourcent): self
+    {
+        $this->motif_80_pourcent = $motif_80_pourcent;
+
+        return $this;
+    }
+
+    public function getMotif90Pourcent(): ?string
+    {
+        return $this->motif_90_pourcent;
+    }
+
+    public function setMotif90Pourcent(?string $motif_90_pourcent): self
+    {
+        $this->motif_90_pourcent = $motif_90_pourcent;
+
+        return $this;
+    }
+
+    public function getMotif50Pourcent(): ?string
+    {
+        return $this->motif_50_pourcent;
+    }
+
+    public function setMotif50Pourcent(?string $motif_50_pourcent): self
+    {
+        $this->motif_50_pourcent = $motif_50_pourcent;
 
         return $this;
     }
